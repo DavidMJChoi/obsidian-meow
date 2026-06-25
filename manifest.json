@@ -1,0 +1,11 @@
+{
+	"id": "meow",
+	"name": "Meow",
+	"version": "0.0.1",
+	"minAppVersion": "0.0.1",
+	"description": "LLM-based grammar checking assistant",
+	"author": "dmc",
+	"authorUrl": "",
+	"fundingUrl": "",
+	"isDesktopOnly": false
+}

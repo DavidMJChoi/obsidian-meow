@@ -1,5 +1,6 @@
 import { Editor, MarkdownView, Notice, Plugin } from 'obsidian';
 import { callDeepSeek } from './api';
+import { PolishingDiffModal } from './diff-modal';
 import { DEFAULT_SETTINGS, MeowPluginSettings, MeowSettingTab } from './settings';
 
 export default class MeowPlugin extends Plugin {
@@ -71,7 +72,19 @@ export default class MeowPlugin extends Plugin {
 		notice.hide();
 
 		if (result) {
-			editor.replaceSelection(result);
+			if (result.trim() === selectedText.trim()) {
+				new Notice('No changes to apply — the polished text is identical.');
+			} else {
+				new PolishingDiffModal(
+					this.app,
+					selectedText,
+					result,
+					() => {
+						editor.replaceSelection(result);
+						new Notice('Polished text applied.');
+					},
+				).open();
+			}
 		}
 	}
 }

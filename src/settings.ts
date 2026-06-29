@@ -8,9 +8,15 @@ export interface MeowPluginSettings {
 	model: string;
 }
 
+const DEFAULT_PROMPT = `You are a helpful assistant. Please help polish and improve the following text. Fix any grammar error. Never change the original meaning of the text given to you.
+
+In your response, please include only the polished text since your response will be used directly to replace text.`
+
+// But do add a "meow~" to the end of your response, so that I can make sure it is actually your response.
+
 export const DEFAULT_SETTINGS: MeowPluginSettings = {
 	apiKey: '',
-	systemPrompt: 'You are a helpful assistant. Please help polish and improve the following text.',
+	systemPrompt: DEFAULT_PROMPT,
 	apiEndpoint: 'https://api.deepseek.com/v1/chat/completions',
 	model: 'deepseek-chat',
 };

@@ -1,8 +1,26 @@
-/*
+.meow-diff-container {
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: var(--font-text);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: var(--background-primary);
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.meow-diff-removed {
+    background-color: rgba(255, 0, 0, 0.15);
+    text-decoration: line-through;
+    border-radius: 3px;
+    padding: 0 2px;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
+.meow-diff-added {
+    background-color: rgba(0, 255, 0, 0.15);
+    border-radius: 3px;
+    padding: 0 2px;
+}

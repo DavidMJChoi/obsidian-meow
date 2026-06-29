@@ -35,7 +35,7 @@ export class MeowSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('API key')
-			.setDesc('Your DeepSeek API key (stored locally only).')
+			.setDesc('Your OpenAI-compatible API key (stored locally only).')
 			.addText((text) => {
 				text.inputEl.type = 'password';
 				text.setPlaceholder('sk-...')

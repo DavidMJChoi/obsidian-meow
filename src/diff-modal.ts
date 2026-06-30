@@ -1,4 +1,4 @@
-import { Modal, App, Notice, Setting } from 'obsidian';
+import { Modal, App, Setting } from 'obsidian';
 import { diffWords } from 'diff';
 
 export class PolishingDiffModal extends Modal {
@@ -15,7 +15,7 @@ export class PolishingDiffModal extends Modal {
 
 	onOpen() {
 		const { titleEl, contentEl } = this;
-		titleEl.setText('Polishing Preview');
+		titleEl.setText('Polishing preview');
 
 		const diffContainer = contentEl.createDiv({ cls: 'meow-diff-container' });
 
@@ -37,9 +37,9 @@ export class PolishingDiffModal extends Modal {
 			}
 		}
 
-		let acceptBtn: HTMLElement | undefined;
+			let acceptBtn: HTMLElement | undefined;
 
-	new Setting(contentEl)
+		new Setting(contentEl)
 			.setName('Apply these changes?')
 			.addButton((btn) => {
 				btn
@@ -61,7 +61,7 @@ export class PolishingDiffModal extends Modal {
 					}),
 			);
 
-	if (acceptBtn) acceptBtn.focus();
+		if (acceptBtn) acceptBtn.focus();
 	}
 
 	onClose() {

@@ -24,3 +24,59 @@
     border-radius: 3px;
     padding: 0 2px;
 }
+
+.meow-ask-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.meow-ask-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: var(--font-text);
+    padding: 8px 10px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    line-height: 1.5;
+}
+
+.meow-ask-selection-note {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    background: var(--background-secondary);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.meow-ask-response {
+    margin-top: 16px;
+    padding: 12px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: var(--font-text);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: var(--background-primary);
+}
+
+.meow-ask-hidden {
+    display: none !important;
+}
+
+.meow-ask-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 16px;
+}

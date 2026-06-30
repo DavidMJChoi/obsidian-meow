@@ -1,4 +1,4 @@
-import { Notice } from 'obsidian';
+import { Notice, requestUrl } from 'obsidian';
 
 export interface ChatMessage {
 	role: 'system' | 'user';
@@ -11,7 +11,8 @@ export async function callDeepSeek(
 	model: string,
 	messages: ChatMessage[],
 ): Promise<string | null> {
-	const response = await fetch(endpoint, {
+	const response = await requestUrl({
+		url: endpoint,
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -22,14 +23,14 @@ export async function callDeepSeek(
 			messages,
 			stream: false,
 		}),
+		throw: false,
 	});
 
-	if (!response.ok) {
-		const errorBody = await response.text();
-		let detail = errorBody;
+	if (response.status < 200 || response.status >= 300) {
+		let detail = response.text;
 		try {
-			const parsed = JSON.parse(errorBody);
-			detail = parsed.error?.message ?? errorBody;
+			const parsed = JSON.parse(response.text) as { error?: { message?: string } };
+			detail = parsed.error?.message ?? response.text;
 		} catch {
 			// use raw text
 		}
@@ -37,7 +38,7 @@ export async function callDeepSeek(
 		return null;
 	}
 
-	const data = await response.json() as {
+	const data = response.json as {
 		choices: { message: { content: string } }[];
 	};
 

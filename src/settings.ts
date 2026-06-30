@@ -6,11 +6,10 @@ export interface MeowPluginSettings {
 	systemPrompt: string;
 	apiEndpoint: string;
 	model: string;
+	catModeEnabled: boolean;
 }
 
-const DEFAULT_PROMPT = `You are a helpful assistant. Please help polish and improve the following text. Fix any grammar error. Never change the original meaning of the text given to you.
-
-In your response, please include only the polished text since your response will be used directly to replace text.`
+const DEFAULT_PROMPT = `You are a helpful assistant.`
 
 // But do add a "meow~" to the end of your response, so that I can make sure it is actually your response.
 
@@ -19,6 +18,7 @@ export const DEFAULT_SETTINGS: MeowPluginSettings = {
 	systemPrompt: DEFAULT_PROMPT,
 	apiEndpoint: 'https://api.deepseek.com/v1/chat/completions',
 	model: 'deepseek-chat',
+	catModeEnabled: true,
 };
 
 export class MeowSettingTab extends PluginSettingTab {
@@ -38,6 +38,7 @@ export class MeowSettingTab extends PluginSettingTab {
 			.setDesc('Your OpenAI-compatible API key (stored locally only).')
 			.addText((text) => {
 				text.inputEl.type = 'password';
+				// eslint-disable-next-line obsidianmd/ui/sentence-case
 				text.setPlaceholder('sk-...')
 					.setValue(this.plugin.settings.apiKey)
 					.onChange(async (value) => {
@@ -48,8 +49,9 @@ export class MeowSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('System prompt')
-			.setDesc('Fixed instruction sent alongside the selected text.')
+			.setDesc('Base system prompt — combined with task-specific instructions for each command.')
 			.addTextArea((text) => {
+				// eslint-disable-next-line obsidianmd/ui/sentence-case
 				text.setPlaceholder('e.g. Correct grammar and spelling errors...')
 					.setValue(this.plugin.settings.systemPrompt)
 					.onChange(async (value) => {
@@ -63,6 +65,7 @@ export class MeowSettingTab extends PluginSettingTab {
 			.setName('API endpoint')
 			.setDesc('OpenAI-compatible chat completions endpoint.')
 			.addText((text) => {
+				// eslint-disable-next-line obsidianmd/ui/sentence-case
 				text.setPlaceholder('https://api.deepseek.com/v1/chat/completions')
 					.setValue(this.plugin.settings.apiEndpoint)
 					.onChange(async (value) => {
@@ -72,9 +75,21 @@ export class MeowSettingTab extends PluginSettingTab {
 			});
 
 		new Setting(containerEl)
+			.setName('Cat girl mode')
+			.setDesc('Enable cat girl persona by default in quick questions.')
+			.addToggle((toggle) =>
+				toggle.setValue(this.plugin.settings.catModeEnabled).onChange(async (value) => {
+					this.plugin.settings.catModeEnabled = value;
+					await this.plugin.saveSettings();
+				}),
+			);
+
+		new Setting(containerEl)
 			.setName('Model')
+			// eslint-disable-next-line obsidianmd/ui/sentence-case
 			.setDesc('Model name to use (e.g. deepseek-chat, deepseek-reasoner).')
 			.addText((text) => {
+				// eslint-disable-next-line obsidianmd/ui/sentence-case
 				text.setPlaceholder('deepseek-chat')
 					.setValue(this.plugin.settings.model)
 					.onChange(async (value) => {

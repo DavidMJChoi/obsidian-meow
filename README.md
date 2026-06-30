@@ -1,19 +1,40 @@
 # obsidian-meow
 
-An Obsidian plugin that improves your writing — grammar fixes, wording improvements, and more, all without leaving your editor.
+An Obsidian plugin that polishes your writing and answers quick questions — powered by an LLM, all without leaving your editor.
 
-Select text, click the cat icon (or run the **Polish selected text** command), and a diff preview modal appears — review the changes (additions in green, removals in red), then Accept or Reject.
+## Features
 
-The polishment is accomplished by sending the selected text (with a system prompt) to an LLM, and replace the selected text with its response.
+**Polish selected text** — select text, run the command, and a diff preview modal shows changes with word-level highlighting (additions in green, removals in red strikethrough). Accept or reject with a click.
 
-The API endpoint is configurable, so any OpenAI-compatible chat completions provider works too.
+**Ask a quick question** — open a lightweight Q&A modal, type a prompt (optionally combined with selected text), and get an inline response. Toggle **Cat girl mode** for a playful feline persona, or keep it professional.
+
+The API endpoint is configurable, so any OpenAI-compatible chat completions provider works (DeepSeek by default).
+
+## Commands
+
+| Command | ID | Description |
+|---------|-----|-------------|
+| Polish selected text | `meow-polish` | Polishes the selected text via LLM, shows diff preview before applying |
+| Ask a quick question | `meow-ask` | Opens a Q&A modal — ask anything, see the response inline |
+
+## Privacy
+
+This plugin sends selected text or your questions to an external LLM service to generate responses. By default, the endpoint is **DeepSeek** (`api.deepseek.com`). You can configure any OpenAI-compatible provider in settings.
+
+- **What is sent**: the text you select (polish) or type (quick question), plus a system prompt
+- **Where it goes**: the API endpoint configured in settings (DeepSeek by default)
+- **API key**: stored locally in your vault's `data.json` in plain text — never sent anywhere except to the configured endpoint
+- **No telemetry**: the plugin does not collect analytics, usage data, or vault contents
+- **Opt-in only**: no network requests occur until you explicitly run a command
 
 ## Source code structure
 
 ```
 src/
-├── main.ts        — Plugin entry point: registers the ribbon icon, command, and settings tab
-├── api.ts         — DeepSeek / OpenAI-compatible chat completions API client
-├── diff-modal.ts  — Modal for reviewing AI-polished text with word-level diff highlighting
-└── settings.ts    — Settings interface, defaults, and the settings tab UI
+├── main.ts        — Plugin entry point: lifecycle, command registration
+├── api.ts         — OpenAI-compatible chat completions API client
+├── prompts.ts     — System prompt constants for each feature
+├── ask-modal.ts   — Q&A modal with cat mode toggle, Enter-to-send
+├── diff-modal.ts  — Diff preview modal with Accept/Reject confirmation
+└── settings.ts    — Settings interface, defaults, and settings tab UI
 ```

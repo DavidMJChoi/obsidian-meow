@@ -1,5 +1,5 @@
 # obsidian-meow
-
+![alt text](obsidian-meow-v1.png)
 An Obsidian plugin that polishes your writing and answers quick questions — powered by an LLM, all without leaving your editor.
 
 ## Features

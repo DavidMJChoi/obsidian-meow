@@ -1,8 +1,8 @@
 {
 	"id": "meow",
 	"name": "Meow",
-	"version": "1.0.0",
-	"minAppVersion": "1.0.0",
+	"version": "1.0.1",
+	"minAppVersion": "1.0.1",
 	"description": "LLM-powered text polishing and quick Q&A — grammar fixes, wording improvements, and instant answers without leaving your editor.",
 	"author": "dmc",
 	"authorUrl": "https://github.com/DavidMJChoi",

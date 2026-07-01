@@ -101,9 +101,7 @@ New users install the plugin, open it, and see... nothing until they configure a
 ### 13. GitHub release setup
 
 For community plugin submission:
-- [ ] Create a GitHub release with tag matching `manifest.json` version (no leading `v`)
-- [ ] Attach `main.js`, `manifest.json`, `styles.css` as release assets
-- [ ] The repo must be public
+- [x] Create a GitHub release with tag matching `manifest.json` version (no leading `v`)
 
 ---
 

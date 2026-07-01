@@ -70,8 +70,8 @@
     background: var(--background-primary);
 }
 
-.meow-ask-hidden {
-    display: none !important;
+.meow-ask-hidden.meow-ask-hidden {
+    display: none;
 }
 
 .meow-ask-buttons {

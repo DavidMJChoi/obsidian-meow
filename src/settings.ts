@@ -38,8 +38,7 @@ export class MeowSettingTab extends PluginSettingTab {
 			.setDesc('Your OpenAI-compatible API key (stored locally only).')
 			.addText((text) => {
 				text.inputEl.type = 'password';
-				// eslint-disable-next-line obsidianmd/ui/sentence-case
-				text.setPlaceholder('sk-...')
+				text.setPlaceholder('API key beginning with sk-...')
 					.setValue(this.plugin.settings.apiKey)
 					.onChange(async (value) => {
 						this.plugin.settings.apiKey = value.trim();
@@ -51,8 +50,7 @@ export class MeowSettingTab extends PluginSettingTab {
 			.setName('System prompt')
 			.setDesc('Base system prompt — combined with task-specific instructions for each command.')
 			.addTextArea((text) => {
-				// eslint-disable-next-line obsidianmd/ui/sentence-case
-				text.setPlaceholder('e.g. Correct grammar and spelling errors...')
+				text.setPlaceholder('Correct grammar, spelling, and style issues')
 					.setValue(this.plugin.settings.systemPrompt)
 					.onChange(async (value) => {
 						this.plugin.settings.systemPrompt = value;
@@ -65,8 +63,7 @@ export class MeowSettingTab extends PluginSettingTab {
 			.setName('API endpoint')
 			.setDesc('OpenAI-compatible chat completions endpoint.')
 			.addText((text) => {
-				// eslint-disable-next-line obsidianmd/ui/sentence-case
-				text.setPlaceholder('https://api.deepseek.com/v1/chat/completions')
+				text.setPlaceholder('OpenAI-compatible chat completions URL')
 					.setValue(this.plugin.settings.apiEndpoint)
 					.onChange(async (value) => {
 						this.plugin.settings.apiEndpoint = value.trim();
@@ -76,7 +73,7 @@ export class MeowSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Cat girl mode')
-			.setDesc('Enable cat girl persona by default in quick questions.')
+			.setDesc('Enable cat girl persona in quick questions.')
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.catModeEnabled).onChange(async (value) => {
 					this.plugin.settings.catModeEnabled = value;
@@ -86,11 +83,9 @@ export class MeowSettingTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName('Model')
-			// eslint-disable-next-line obsidianmd/ui/sentence-case
-			.setDesc('Model name to use (e.g. deepseek-chat, deepseek-reasoner).')
+			.setDesc('Model name to use with the API endpoint.')
 			.addText((text) => {
-				// eslint-disable-next-line obsidianmd/ui/sentence-case
-				text.setPlaceholder('deepseek-chat')
+				text.setPlaceholder('Model name')
 					.setValue(this.plugin.settings.model)
 					.onChange(async (value) => {
 						this.plugin.settings.model = value.trim();
